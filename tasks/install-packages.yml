@@ -1,0 +1,22 @@
+---
+# List of basic packages for our devs
+#
+# Available variables:
+#
+#   common_packages
+#     this is a list of packages to be installed list
+#     can be updated at defaults/main.yml
+#
+#  Tags:
+#
+#    defines each of tasks individualy and can be executed individualy
+#
+#    example:
+#      ansible-playbook -i inventory/staging play.yml -t <name_of_tag>
+#        this will execute just tagged task so update of single component
+#        is done fast
+
+- name: Install packages
+  apt: pkg={{ item }} state=present
+  with_items: common_packages
+  tags: apt

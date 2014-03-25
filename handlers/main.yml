@@ -1,0 +1,6 @@
+---
+# Handlers file defines a command that will be executed after all tasks are done
+# and can be called multiple times.
+
+- name: update tzdata
+  command: /usr/sbin/dpkg-reconfigure --frontend noninteractive tzdata

@@ -1,0 +1,7 @@
+---
+# This role provides common tasks for post install setup
+# "common tasks" is a list of task and is not yet completely defined
+
+- include: update-packages.yml
+- include: locale.yml
+- include: install-packages.yml

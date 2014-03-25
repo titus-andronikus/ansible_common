@@ -1,0 +1,12 @@
+---
+# Variables are defined by developer/administrator and are used in roles and templates
+#   They are defined as:
+#       var_name: value
+#
+#   Variables can have child vars and are defined in new line with two spaces
+#   those vars are called like:
+#       parent_var.child_var
+#
+
+locale: en_US.UTF-8
+timezone: Europe/Belgrade

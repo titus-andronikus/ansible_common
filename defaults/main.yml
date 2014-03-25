@@ -1,0 +1,8 @@
+---
+  common_packages:
+    - curl
+    - git
+    - vim
+    - emacs
+    - python-psycopg2
+    - python-pycurl

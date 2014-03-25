@@ -1,0 +1,51 @@
+---
+# This role sets locale
+# {{ variables }} are defined in <role>/vars directory
+# all variables are required unless noted otherwise
+#
+# Available variables in this role
+#
+#   locale
+#     defines locale settings for server
+#
+#     example:
+#       locale: en_US.UTF-8
+#
+#   timezone
+#     setup timezone of your server
+#
+#     example:
+#       timezone: UTC
+#
+#  Tags: defines each of tasks individualy and can be executed individualy
+#
+#     example:  ansible-playbook -i inventory/staging play.yml -t <name_of_tag>
+#       this will execute just tagged task so update of single component
+#          is done fast
+
+- name: Set default language
+  template: src=locale.gen.j2 dest=/etc/locale.gen
+  tags: locale
+  register: set_locale
+
+- name: Install locales
+  command: locale-gen
+  tags: locale
+  when: set_locale|changed
+
+- name: set locale to {{ locale }}
+  command: /usr/sbin/update-locale
+    LANG={{ locale }} LC_ALL={{ locale }} LANGUAGE=en_US:en
+  tags: locale
+  when: set_locale|changed
+
+- name: set /etc/localtime to {{ timezone }}
+  copy: src=/usr/share/zoneinfo/{{ timezone }} dest=/etc/localtime
+  tags: locale
+  when: set_locale|changed
+
+- name: set /etc/timezone to {{ timezone }}
+  template: src=timezone.j2 dest=/etc/timezone
+  tags: locale
+  when: set_locale|changed
+

@@ -1,0 +1,5 @@
+---
+# Updates all Debian packages to their latest versions.
+
+- name: Base | Update all packages
+  apt: update-cache=yes cache_valid_time=86400
